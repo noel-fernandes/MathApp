@@ -13,7 +13,7 @@ namespace MathLib.UnitTests
             //Arrange
             int factorialFor = 0;
             int expected = 1;
-            var systemUnderTest = new MathLib();
+            var systemUnderTest = new MathLib("not-recursive");
 
             //Act
             int result = systemUnderTest.Factorial(factorialFor);
@@ -28,7 +28,7 @@ namespace MathLib.UnitTests
             //Arrange
             int factorialFor = 1;
             int expected = 1;
-            var systemUnderTest = new MathLib();
+            var systemUnderTest = new MathLib("recursive");
 
             //Act
             int result = systemUnderTest.Factorial(factorialFor);
@@ -43,7 +43,7 @@ namespace MathLib.UnitTests
             //Arrange
             int factorialFor = 2;
             int expected = 2;
-            var systemUnderTest = new MathLib();
+            var systemUnderTest = new MathLib("nonrecursive");
 
             //Act
             int result = systemUnderTest.Factorial(factorialFor);
@@ -58,7 +58,7 @@ namespace MathLib.UnitTests
             //Arrange
             int factorialFor = 3;
             int expected = 6;
-            var systemUnderTest = new MathLib();
+            var systemUnderTest = new MathLib("recursive");
 
             //Act
             int result = systemUnderTest.Factorial(factorialFor);
@@ -73,7 +73,7 @@ namespace MathLib.UnitTests
             //Arrange
             int factorialFor = 6;
             int expected = 720;
-            var systemUnderTest = new MathLib();
+            var systemUnderTest = new MathLib("non-recursive");
 
             //Act
             int result = systemUnderTest.Factorial(factorialFor);
@@ -88,7 +88,7 @@ namespace MathLib.UnitTests
             //Arrange
             int factorialFor = 10;
             int expected = 3628800;
-            var systemUnderTest = new MathLib();
+            var systemUnderTest = new MathLib("recursive");
 
             //Act
             int result = systemUnderTest.Factorial(factorialFor);
@@ -100,6 +100,13 @@ namespace MathLib.UnitTests
 
     public class MathLib
     {
+        private string _executionType;
+
+        public MathLib(string executionType)
+        {
+            this._executionType = executionType;
+        }
+
         internal int Factorial(int factorialFor)
         {
             int result = 0;
@@ -113,7 +120,10 @@ namespace MathLib.UnitTests
             else 
             {
                 //result = CalculateFactorialRecursively(factorialFor);
-                result = CalculateFactorialNonRecursively(factorialFor);
+                //result = CalculateFactorialNonRecursively(factorialFor);
+                result = _executionType.Equals("recursive", StringComparison.OrdinalIgnoreCase) ?
+                    CalculateFactorialRecursively(factorialFor) :
+                    CalculateFactorialNonRecursively(factorialFor);
             }
 
             return result;
