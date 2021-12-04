@@ -126,6 +126,36 @@ namespace MathLib.UnitTests
             //Assert
             Assert.Equal(expected, result);
         }
+
+        [Fact]
+        public void SquaredFactorialFor_6_ShouldReturn_518400()
+        {
+            //Arrange
+            int factorialFor = 6;
+            int expected = 518400;
+            var systemUnderTest = new MathLib(ExecutionMethod.NonRecursive);
+
+            //Act
+            int result = systemUnderTest.SquaredFactorialNonRecursively(factorialFor);
+
+            //Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void SquaredFactorialFor_7_ShouldReturn_25401600()
+        {
+            //Arrange
+            int factorialFor = 7;
+            int expected = 25401600;
+            var systemUnderTest = new MathLib(ExecutionMethod.NonRecursive);
+
+            //Act
+            int result = systemUnderTest.SquaredFactorialRecursively(factorialFor);
+
+            //Assert
+            Assert.Equal(expected, result);
+        }
     }
 
     public enum ExecutionMethod 
@@ -219,6 +249,27 @@ namespace MathLib.UnitTests
             }
 
             return factorialFor * OddFactorialRecursively(factorialFor - 2);
+        }
+
+        internal int SquaredFactorialNonRecursively(int factorialFor)
+        {
+            int factorial = 0;
+
+            IEnumerable<int> numbersList = Enumerable.Range(1, factorialFor).Select(n => n * n);
+            factorial = numbersList.Aggregate((aggregateValue, currentElement) => aggregateValue * currentElement);
+
+            return factorial;
+        }
+
+        internal int SquaredFactorialRecursively(int factorialFor)
+        {
+            // Check to break recursivness
+            if (factorialFor <= 1)
+            {
+                return factorialFor;
+            }
+
+            return (factorialFor * factorialFor) * (CalculateFactorialRecursively(factorialFor - 1) * CalculateFactorialRecursively(factorialFor - 1));
         }
     }
 }
