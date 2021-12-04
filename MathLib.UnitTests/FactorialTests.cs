@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace MathLib.UnitTests
@@ -124,7 +126,12 @@ namespace MathLib.UnitTests
         /// <returns>The factorial for the supplied number.</returns>
         private int CalculateFactorialNonRecursively(int factorialFor)
         {
-            throw new NotImplementedException();
+            int factorial = 0;
+
+            IEnumerable<int> numbersList = Enumerable.Range(1, factorialFor);
+            factorial = numbersList.Aggregate((aggregateValue, currentElement) => aggregateValue * currentElement);
+
+            return factorial;
         }
 
         /// <summary>
