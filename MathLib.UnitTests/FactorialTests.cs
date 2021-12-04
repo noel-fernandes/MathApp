@@ -11,9 +11,10 @@ namespace MathLib.UnitTests
             //Arrange
             int factorialFor = 0;
             int expected = 1;
+            var systemUnderTest = new MathLib();
 
             //Act
-            int result = 0;
+            int result = systemUnderTest.Factorial(factorialFor);
 
             //Assert
             Assert.Equal(expected, result);
@@ -25,9 +26,10 @@ namespace MathLib.UnitTests
             //Arrange
             int factorialFor = 1;
             int expected = 1;
+            var systemUnderTest = new MathLib();
 
             //Act
-            int result = 0;
+            int result = systemUnderTest.Factorial(factorialFor);
 
             //Assert
             Assert.Equal(expected, result);
@@ -39,9 +41,10 @@ namespace MathLib.UnitTests
             //Arrange
             int factorialFor = 2;
             int expected = 2;
+            var systemUnderTest = new MathLib();
 
             //Act
-            int result = 0;
+            int result = systemUnderTest.Factorial(factorialFor);
 
             //Assert
             Assert.Equal(expected, result);
@@ -53,9 +56,10 @@ namespace MathLib.UnitTests
             //Arrange
             int factorialFor = 3;
             int expected = 6;
+            var systemUnderTest = new MathLib();
 
             //Act
-            int result = 0;
+            int result = systemUnderTest.Factorial(factorialFor);
 
             //Assert
             Assert.Equal(expected, result);
@@ -67,9 +71,10 @@ namespace MathLib.UnitTests
             //Arrange
             int factorialFor = 6;
             int expected = 720;
+            var systemUnderTest = new MathLib();
 
             //Act
-            int result = 0;
+            int result = systemUnderTest.Factorial(factorialFor);
 
             //Assert
             Assert.Equal(expected, result);
@@ -81,12 +86,21 @@ namespace MathLib.UnitTests
             //Arrange
             int factorialFor = 10;
             int expected = 3628800;
+            var systemUnderTest = new MathLib();
 
             //Act
-            int result = 0;
+            int result = systemUnderTest.Factorial(factorialFor);
 
             //Assert
             Assert.Equal(expected, result);
+        }
+    }
+
+    public class MathLib
+    {
+        internal int Factorial(int factorialFor)
+        {
+            throw new NotImplementedException();
         }
     }
 }
