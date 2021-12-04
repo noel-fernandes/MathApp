@@ -110,16 +110,27 @@ namespace MathLib.UnitTests
             }
             else 
             {
-                result = CalculateFactorialRecursively(factorialFor);
+                //result = CalculateFactorialRecursively(factorialFor);
+                result = CalculateFactorialNonRecursively(factorialFor);
             }
 
             return result;
         }
 
         /// <summary>
+        /// A method that calculates the factorial using list functions
+        /// </summary>
+        /// <param name="factorialFor">Integer for which the factorial needs to be calculated for.</param>
+        /// <returns>The factorial for the supplied number.</returns>
+        private int CalculateFactorialNonRecursively(int factorialFor)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// A method that calculates the factorial using recursive functions
         /// </summary>
-        /// <param name="factorialFor">Input the number for which the factorial needs to be calculated for.</param>
+        /// <param name="factorialFor">Integer for which the factorial needs to be calculated for.</param>
         /// <returns>The factorial for the supplied number.</returns>
         private int CalculateFactorialRecursively(int factorialFor)
         {
