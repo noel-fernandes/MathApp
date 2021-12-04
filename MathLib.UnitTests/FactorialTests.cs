@@ -100,7 +100,16 @@ namespace MathLib.UnitTests
     {
         internal int Factorial(int factorialFor)
         {
-            throw new NotImplementedException();
+            int result = 0;
+
+            // Anything below 0 will be defaulted to 1.
+            // In case of factorial for 1, anything multiplied by 0 will be 0. Hence the check for factorial of 1
+            if (factorialFor <= 1)
+            {
+                result = 1;
+            }
+
+            return result;
         }
     }
 }
