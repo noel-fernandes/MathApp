@@ -108,8 +108,28 @@ namespace MathLib.UnitTests
             {
                 result = 1;
             }
+            else 
+            {
+                result = CalculateFactorialRecursively(factorialFor);
+            }
 
             return result;
+        }
+
+        /// <summary>
+        /// A method that calculates the factorial using recursive functions
+        /// </summary>
+        /// <param name="factorialFor">Input the number for which the factorial needs to be calculated for.</param>
+        /// <returns>The factorial for the supplied number.</returns>
+        private int CalculateFactorialRecursively(int factorialFor)
+        {
+            // Check to break recursivness
+            if (factorialFor <= 1)
+            {
+                return factorialFor;
+            }
+
+            return factorialFor * CalculateFactorialRecursively(factorialFor - 1);
         }
     }
 }
