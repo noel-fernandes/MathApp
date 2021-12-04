@@ -96,6 +96,36 @@ namespace MathLib.UnitTests
             //Assert
             Assert.Equal(expected, result);
         }
+
+        [Fact]
+        public void OddFactorialFor_6_ShouldReturn_15()
+        {
+            //Arrange
+            int factorialFor = 6;
+            int expected = 15;
+            var systemUnderTest = new MathLib(ExecutionMethod.NonRecursive);
+
+            //Act
+            int result = systemUnderTest.OddFactorialNonRecursively(factorialFor);
+
+            //Assert
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void OddFactorialFor_7_ShouldReturn_105()
+        {
+            //Arrange
+            int factorialFor = 7;
+            int expected = 105;
+            var systemUnderTest = new MathLib(ExecutionMethod.NonRecursive);
+
+            //Act
+            int result = systemUnderTest.OddFactorialRecursively(factorialFor);
+
+            //Assert
+            Assert.Equal(expected, result);
+        }
     }
 
     public enum ExecutionMethod 
@@ -117,6 +147,7 @@ namespace MathLib.UnitTests
         {
             this._executionMethod = executionMethod;
         }
+
 
         internal int Factorial(int factorialFor)
         {
@@ -167,6 +198,27 @@ namespace MathLib.UnitTests
             }
 
             return factorialFor * CalculateFactorialRecursively(factorialFor - 1);
+        }
+
+        internal int OddFactorialNonRecursively(int factorialFor)
+        {
+            int factorial = 0;
+
+            IEnumerable<int> numbersList = Enumerable.Range(1, factorialFor).Where(n => n % 2 != 0);
+            factorial = numbersList.Aggregate((aggregateValue, currentElement) => aggregateValue * currentElement);
+
+            return factorial;
+        }
+
+        internal int OddFactorialRecursively(int factorialFor)
+        {
+            // Check to break recursivness
+            if (factorialFor <= 1)
+            {
+                return factorialFor;
+            }
+
+            return factorialFor * OddFactorialRecursively(factorialFor - 2);
         }
     }
 }
