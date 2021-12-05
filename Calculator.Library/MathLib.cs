@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Calculator.Library
 {
-
     public enum ExecutionMethod
     {
         NonRecursive = 1,
@@ -66,11 +64,6 @@ namespace Calculator.Library
                 {
                     result = CalculateFactorialNonRecursively(factorialFor, squared, doubleFactorialType);
                 }
-
-                //if (squared)
-                //{
-                //    result *= result;
-                //}
             }
 
             return result;
@@ -94,7 +87,7 @@ namespace Calculator.Library
                 numbersList = numbersList.Where(n => n % 2 != 0);
             }
 
-            if (squared) 
+            if (squared)
             {
                 numbersList = numbersList.Select(n => n * n);
             }
