@@ -3,20 +3,7 @@ using System.Linq;
 
 namespace Calculator.Library
 {
-    public enum ExecutionMethod
-    {
-        NonRecursive = 1,
-        Recursive = 0
-    }
-
-    public enum DoubleFactorialType
-    {
-        All = 0,
-        Even = 1,
-        Odd = 2
-    }
-
-    public class MathLib
+    public class MathLib : IMathLib
     {
         private readonly ExecutionMethod _executionMethod;
 
@@ -37,44 +24,78 @@ namespace Calculator.Library
             this._executionMethod = executionMethod;
         }
 
-        /// <summary>
-        /// Calculates the factorial for a given number. Mathematically represented as 5! = 5*4*3*2*1
-        /// </summary>
-        /// <param name="factorialFor">The number for which the factorial is calculated</param>
-        /// <param name="squared">Setting this to 'true' will calculate as follows: 3! = (3*3)*(2*2)*(1*1). Default is set to false.</param>
-        /// <param name="doubleFactorialType">Set to 'Even' or 'Odd' to calculate the factorial for even or odd numbers respectively. Default is 'All'</param>
-        /// <returns>An integer containing the factorial for a given number.</returns>
-        public int Factorial(int factorialFor, bool squared = false, DoubleFactorialType doubleFactorialType = DoubleFactorialType.All)
+        public int Factorial(int factorialFor, bool squareFactorial = false, DoubleFactorialType doubleFactorialType = DoubleFactorialType.All)
         {
+            if (factorialFor <= 1)
+                return 1;
+
             int result = 0;
 
-            // Anything below 0 will be defaulted to 1.
-            // In case of factorial for 1, anything multiplied by 0 will be 0. Hence the check for factorial of 1
-            if (factorialFor <= 1)
+            if (this._executionMethod is ExecutionMethod.Recursive)
             {
-                result = 1;
+                result = CalculateFactorialRecursively(factorialFor, squareFactorial, doubleFactorialType);
             }
             else
             {
-                if (this._executionMethod == ExecutionMethod.Recursive)
-                {
-                    result = CalculateFactorialRecursively(factorialFor, squared, doubleFactorialType);
-                }
-                else
-                {
-                    result = CalculateFactorialNonRecursively(factorialFor, squared, doubleFactorialType);
-                }
+                result = CalculateFactorialNonRecursively(factorialFor, squareFactorial, doubleFactorialType);
             }
 
             return result;
         }
 
-        /// <summary>
-        /// A method that calculates the factorial using list functions
-        /// </summary>
-        /// <param name="factorialFor">Integer for which the factorial needs to be calculated for.</param>
-        /// <returns>The factorial for the supplied number.</returns>
-        private int CalculateFactorialNonRecursively(int factorialFor, bool squared, DoubleFactorialType doubleFactorialType = DoubleFactorialType.All)
+        private int CalculateFactorialRecursively(int factorialFor, bool squareFactorial, DoubleFactorialType doubleFactorialType)
+        {
+            if (doubleFactorialType is DoubleFactorialType.Odd)
+            {
+                factorialFor = factorialFor % 2 == 0 ? factorialFor - 1 : factorialFor;
+                return CalculateDoubleFactorialUsingRecursive(factorialFor);
+            }
+            else if (doubleFactorialType is DoubleFactorialType.Even)
+            {
+                factorialFor = factorialFor % 2 != 0 ? factorialFor - 1 : factorialFor;
+                return CalculateDoubleFactorialUsingRecursive(factorialFor);
+            }
+            else if (squareFactorial)
+            {
+                return CalculatesquareFactorialUsingRecursive(factorialFor);
+            }
+            else
+            {
+                return CalculateFactorialUsingRecursive(factorialFor);
+            }
+        }
+
+        private int CalculateFactorialUsingRecursive(int factorialFor)
+        {
+            if (factorialFor <= 1)
+            {
+                return factorialFor;
+            }
+
+            return factorialFor * CalculateFactorialUsingRecursive(factorialFor - 1);
+        }
+
+        private int CalculateDoubleFactorialUsingRecursive(int factorialFor)
+        {
+            if (factorialFor <= 2)
+            {
+                return factorialFor;
+            }
+
+            return factorialFor * CalculateDoubleFactorialUsingRecursive(factorialFor - 2);
+        }
+
+        private int CalculatesquareFactorialUsingRecursive(int factorialFor)
+        {
+            if (factorialFor <= 1)
+            {
+                return factorialFor;
+            }
+
+            return (factorialFor * factorialFor) * CalculatesquareFactorialUsingRecursive(factorialFor - 1);
+        }
+
+        private int CalculateFactorialNonRecursively(int factorialFor, bool squareFactorial, DoubleFactorialType doubleFactorialType)
         {
             IEnumerable<int> numbersList = Enumerable.Range(1, factorialFor);
 
@@ -87,52 +108,18 @@ namespace Calculator.Library
                 numbersList = numbersList.Where(n => n % 2 != 0);
             }
 
-            if (squared)
+            if (squareFactorial)
             {
                 numbersList = numbersList.Select(n => n * n);
             }
 
-            int factorial = numbersList.Aggregate((aggregateValue, currentElement) => aggregateValue * currentElement);
-            return factorial;
+            return CalculateFactorialUsingNumberLists(numbersList);
         }
 
-        /// <summary>
-        /// A method that calculates the factorial using recursive functions
-        /// </summary>
-        /// <param name="factorialFor">Integer for which the factorial needs to be calculated for.</param>
-        /// <returns>The factorial for the supplied number.</returns>
-        private int CalculateFactorialRecursively(int factorialFor, bool squared = false, DoubleFactorialType doubleFactorialType = DoubleFactorialType.All)
+        private int CalculateFactorialUsingNumberLists(IEnumerable<int> numbersList)
         {
-            // Check to break recursivness
-            if (factorialFor <= 1)
-            {
-                return factorialFor;
-            }
-
-            if (squared && doubleFactorialType is DoubleFactorialType.Odd)
-            {
-                if (factorialFor % 2 == 0)
-                {
-                    factorialFor -= 1;
-                }
-
-                return (factorialFor * factorialFor) * CalculateFactorialRecursively(factorialFor - 2, squared, doubleFactorialType);
-            }
-            else if (doubleFactorialType is DoubleFactorialType.Odd)
-            {
-                if (factorialFor % 2 == 0)
-                {
-                    factorialFor -= 1;
-                }
-
-                return factorialFor * CalculateFactorialRecursively(factorialFor - 2, squared, doubleFactorialType);
-            }
-            else if (squared)
-            {
-                return (factorialFor * factorialFor) * CalculateFactorialRecursively(factorialFor - 1, squared, doubleFactorialType);
-            }
-
-            return factorialFor * CalculateFactorialRecursively(factorialFor - 1, squared, doubleFactorialType);
+            int factorial = numbersList.Aggregate((aggregateValue, currentElement) => aggregateValue * currentElement);
+            return factorial;
         }
     }
 }

@@ -5,7 +5,6 @@ namespace Calculator.UnitTests
 {
     public class FactorialTests
     {
-        #region Recursive function Tests
 
         [Theory]
         [InlineData(0, 1)]
@@ -25,10 +24,6 @@ namespace Calculator.UnitTests
             Assert.Equal(expected, result);
         }
 
-        #endregion Recursive function Tests
-
-        #region Non-recursive function tests
-
         [Theory]
         [InlineData(0, 1)]
         [InlineData(1, 1)]
@@ -46,7 +41,5 @@ namespace Calculator.UnitTests
             //Assert
             Assert.Equal(expected, result);
         }
-
-        #endregion Non-recursive function tests
     }
 }
