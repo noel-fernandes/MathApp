@@ -26,10 +26,10 @@ namespace Calculator.Library
 
         public int Factorial(int factorialFor, bool squareFactorial = false, DoubleFactorialType doubleFactorialType = DoubleFactorialType.All)
         {
-            if (factorialFor <= 1)
-                return 1;
 
-            int result = 0;
+            int result = 1;
+            if (factorialFor <= 1)
+                return result;
 
             if (this._executionMethod is ExecutionMethod.Recursive)
             {
