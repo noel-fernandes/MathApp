@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Calculator.Library
 {
@@ -27,7 +25,6 @@ namespace Calculator.Library
 
         public UInt64 Factorial(int factorialFor, bool squareFactorial = false, DoubleFactorialType doubleFactorialType = DoubleFactorialType.All)
         {
-
             UInt64 result = 1;
             if (factorialFor <= 1)
                 return result;

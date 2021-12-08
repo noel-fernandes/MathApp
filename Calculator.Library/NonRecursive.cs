@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calculator.Library
 {
     public static class NonRecursive
     {
-        public static UInt64 CalculateFactorial(int factorialFor, DoubleFactorialType doubleFactorialType, 
+        public static UInt64 CalculateFactorial(int factorialFor, DoubleFactorialType doubleFactorialType,
             bool squareFactorial)
         {
             IEnumerable<UInt64> numbersList = Enumerable.Range(1, factorialFor).Select(n => Convert.ToUInt64(n));
@@ -18,6 +16,7 @@ namespace Calculator.Library
                 case DoubleFactorialType.Even:
                     numbersList = numbersList.Where(n => n % 2 == 0);
                     break;
+
                 case DoubleFactorialType.Odd:
                     numbersList = numbersList.Where(n => n % 2 != 0);
                     break;

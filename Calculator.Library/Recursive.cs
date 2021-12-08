@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Calculator.Library
 {
@@ -20,6 +16,7 @@ namespace Calculator.Library
                     factorialFor = (factorialFor % 2 != 0) ? --factorialFor : factorialFor;
                     jumpFactor = 2;
                     break;
+
                 case DoubleFactorialType.Odd:
                     factorialFor = (factorialFor % 2 == 0) ? --factorialFor : factorialFor;
                     jumpFactor = 2;
@@ -30,7 +27,6 @@ namespace Calculator.Library
 
             result = func(factorialFor, jumpFactor);
             return result;
-
         }
 
         private static Func<int, int, UInt64> RecursiveFactorialFunction(bool squareFactorial)
