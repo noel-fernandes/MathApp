@@ -17,13 +17,13 @@ namespace Calculator.UnitTests
         [InlineData(7, 48, false)]
         [InlineData(10, 3840, false)]
         [InlineData(11, 3840, false)]
-        public void Recursive_EvenFactorialFor_ShouldReturnAFactorial(int factorialFor, int expected, bool squareFactorial)
+        public void Recursive_EvenFactorialFor_ShouldReturnAFactorial(int factorialFor, UInt64 expected, bool squareFactorial)
         {
             //Arrange
             var systemUnderTest = new MathLib();
 
             //Act
-            int result = systemUnderTest.Factorial(factorialFor, squareFactorial, DoubleFactorialType.Even);
+            UInt64 result = systemUnderTest.Factorial(factorialFor, squareFactorial, DoubleFactorialType.Even);
 
             //Assert
             Assert.Equal(expected, result);
@@ -36,13 +36,13 @@ namespace Calculator.UnitTests
         [InlineData(7, 48, false)]
         [InlineData(10, 3840, false)]
         [InlineData(11, 3840, false)]
-        public void NonRecursive_EvenFactorialFor_ShouldReturnAFactorial(int factorialFor, int expected, bool squareFactorial)
+        public void NonRecursive_EvenFactorialFor_ShouldReturnAFactorial(int factorialFor, UInt64 expected, bool squareFactorial)
         {
             //Arrange
             var systemUnderTest = new MathLib(ExecutionMethod.NonRecursive);
 
             //Act
-            int result = systemUnderTest.Factorial(factorialFor, squareFactorial, DoubleFactorialType.Even);
+            UInt64 result = systemUnderTest.Factorial(factorialFor, squareFactorial, DoubleFactorialType.Even);
 
             //Assert
             Assert.Equal(expected, result);

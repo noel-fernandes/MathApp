@@ -1,7 +1,9 @@
-﻿namespace Calculator.Library
+﻿using System;
+
+namespace Calculator.Library
 {
     public interface IMathLib
     {
-        int Factorial(int factorialFor, bool squareFactorial = false, DoubleFactorialType doubleFactorialType = DoubleFactorialType.All);
+        UInt64 Factorial(int factorialFor, bool squareFactorial = false, DoubleFactorialType doubleFactorialType = DoubleFactorialType.All);
     }
 }

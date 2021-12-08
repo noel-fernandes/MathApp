@@ -1,4 +1,5 @@
 ﻿using Calculator.Library;
+using System;
 using Xunit;
 
 namespace Calculator.UnitTests
@@ -11,13 +12,13 @@ namespace Calculator.UnitTests
         [InlineData(1, 1, true)]
         [InlineData(6, 518400, true)]
         [InlineData(7, 25401600, true)]
-        public void Square_Recursive_FactorialFor_ShouldReturn_AFactorial(int factorialFor, int expected, bool squareFactorial)
+        public void Square_Recursive_FactorialFor_ShouldReturn_AFactorial(int factorialFor, UInt64 expected, bool squareFactorial)
         {
             //Arrange
             var systemUnderTest = new MathLib();
 
             //Act
-            int result = systemUnderTest.Factorial(factorialFor, squareFactorial);
+            UInt64 result =systemUnderTest.Factorial(factorialFor, squareFactorial);
 
             //Assert
             Assert.Equal(expected, result);
@@ -28,13 +29,13 @@ namespace Calculator.UnitTests
         [InlineData(1, 1, true)]
         [InlineData(6, 518400, true)]
         [InlineData(7, 25401600, true)]
-        public void Square_NonRecursive_FactorialFor_ShouldReturn_AFactorial(int factorialFor, int expected, bool squareFactorial)
+        public void Square_NonRecursive_FactorialFor_ShouldReturn_AFactorial(int factorialFor, UInt64 expected, bool squareFactorial)
         {
             // Arrange
             var systemUnderTest = new MathLib(ExecutionMethod.NonRecursive);
 
             //Act
-            int result = systemUnderTest.Factorial(factorialFor, squareFactorial);
+            UInt64 result =systemUnderTest.Factorial(factorialFor, squareFactorial);
 
             //Assert
             Assert.Equal(expected, result);
@@ -45,12 +46,12 @@ namespace Calculator.UnitTests
         [InlineData(1, 1, true)]
         [InlineData(6, 225, true)]
         [InlineData(7, 11025, true)]
-        public void Square_NonRecursive_FactorialFor_OddNumbers_ShouldReturn_AFactorial(int factorialFor, int expected, bool squareFactorial)
+        public void Square_NonRecursive_FactorialFor_OddNumbers_ShouldReturn_AFactorial(int factorialFor, UInt64 expected, bool squareFactorial)
         {
             var systemUnderTest = new MathLib(ExecutionMethod.NonRecursive);
 
             //Act
-            int result = systemUnderTest.Factorial(factorialFor, squareFactorial, DoubleFactorialType.Odd);
+            UInt64 result =systemUnderTest.Factorial(factorialFor, squareFactorial, DoubleFactorialType.Odd);
 
             //Assert
             Assert.Equal(expected, result);

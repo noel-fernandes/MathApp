@@ -1,4 +1,5 @@
 using Calculator.Library;
+using System;
 using Xunit;
 
 namespace Calculator.UnitTests
@@ -12,13 +13,14 @@ namespace Calculator.UnitTests
         [InlineData(3, 6)]
         [InlineData(6, 720)]
         [InlineData(10, 3628800)]
-        public void RecursiveFactorial_ShouldReturnAFactorial(int factorialFor, int expected)
+        [InlineData(50, 15188249005818642432)]
+        public void RecursiveFactorial_ShouldReturnAFactorial(int factorialFor, UInt64 expected)
         {
             //Arrange
             var systemUnderTest = new MathLib();
 
             //Act
-            int result = systemUnderTest.Factorial(factorialFor);
+            UInt64 result = systemUnderTest.Factorial(factorialFor);
 
             //Assert
             Assert.Equal(expected, result);
@@ -30,13 +32,14 @@ namespace Calculator.UnitTests
         [InlineData(3, 6)]
         [InlineData(6, 720)]
         [InlineData(10, 3628800)]
-        public void NonRecursiveFactorial_ShouldReturnAFactorial(int factorialFor, int expected)
+        [InlineData(50, 15188249005818642432)]
+        public void NonRecursiveFactorial_ShouldReturnAFactorial(int factorialFor, UInt64 expected)
         {
             //Arrange
             var systemUnderTest = new MathLib(ExecutionMethod.NonRecursive);
 
             //Act
-            int result = systemUnderTest.Factorial(factorialFor);
+            UInt64 result =systemUnderTest.Factorial(factorialFor);
 
             //Assert
             Assert.Equal(expected, result);
